@@ -1,0 +1,10 @@
+{
+	"blogPostId" : 1234,
+	"tripId" : 5678,
+	"content" : "Testing the connection",
+	"coverPhotoPointer" : "s3-url-to-cover-photo-pointer",
+	"subPicturePointerList" : [
+		"s3-url-sub-picture-pointer-1",
+		"s3-url-sub-picture-pointer-2"
+	]
+}

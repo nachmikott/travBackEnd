@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE module PUBLIC
+    "-//Puppy Crawl//DTD Check Configuration 1.3//EN"
+    "http://checkstyle.sourceforge.net/dtds/configuration_1_3.dtd">
+<module name="Checker">
+  <module name="TreeWalker"> 
+  	<!--  These are the standard checks included in CheckStyle. Refer to this list if you want to add more
+  		http://checkstyle.sourceforge.net/checks.html . If you want to write you're own, you can. To write your own 
+  		Java Check, check this url out: http://checkstyle.sourceforge.net/writingchecks.html -->
+  		
+  	<!--  If you are failing a maven build, and its due to failed checkstyle checks, this will be the list of checks
+  		and you can refer to what it is the checks are looking for here: http://checkstyle.sourceforge.net/checks.html -->
+	<module name="AvoidStarImport"/> <!-- Use  -->
+	<module name="ConstantName"/>
+	<module name="EmptyBlock"/>
+    <module name="AbbreviationAsWordInName"/>
+    <module name="BooleanExpressionComplexity"/> 
+    <module name="ConstantName">
+    		<property name="format" value="^[A-Z]*_*[A-Z]*$"/>
+    		<message key="name.invalidPattern"
+             value="Must use only capitalized letters. Must use underscore to seperate logical words"/>
+    </module>
+    
+  </module>
+</module>
