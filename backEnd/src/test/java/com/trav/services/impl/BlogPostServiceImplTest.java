@@ -9,13 +9,18 @@ import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.mockito.Spy;
+import org.mockito.stubbing.Answer;
+
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.trav.backEnd.App;
 import com.trav.exceptions.PersistenceException;
 import com.trav.models.BlogPost;
+import com.trav.utils.PersistenceUtility;
+
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;;
 
@@ -33,16 +38,17 @@ public class BlogPostServiceImplTest {
 	BlogPostServiceImpl blogPostServiceImpl;
 	
 	BlogPost blogPostRequest;
+
 	
 	@Before 
-	public void createBlog() throws JsonParseException, JsonMappingException, IOException {
+	public void setupTest() throws JsonParseException, JsonMappingException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
         blogPostRequest = mapper.readValue(new File("/Users/nachmi/Desktop/Development/"
         		+ "workspace/travBackEnd/backEnd/src/test/resources/com/trav/api/endpoints/PostBlog_Request"), 
         		BlogPost.class);
 	}
 	
-	@Test
+	@Test //Checks that PersistenceException is not thrown in the result of a successful save
 	public void assertCreatePostSuccess() throws JsonParseException, JsonMappingException, IOException {
 		try {
 			blogPostServiceImpl.createPost(blogPostRequest);
@@ -51,16 +57,17 @@ public class BlogPostServiceImplTest {
 		}
 	}
 	
-	@Test
+	@Test //Tests a forced Error, and checks that PersistenceException is thrown if there is an error.
 	public void asserCreatePostFailure() throws JsonParseException, JsonMappingException, IOException {
 		try {
+			blogPostRequest.setContent("ERROR"); 
 			blogPostServiceImpl.createPost(blogPostRequest);
 		} catch (PersistenceException persistenceException) {
 			assertTrue(true); //Automatically passes;
 		}
 	} 
 	
-	@Test
+	@Test //Tests that the Blog Post will throw a PersistenceException if it is null or if there is no Title
 	public void asserCreatePostBadBlog() throws JsonParseException, JsonMappingException, IOException {
 		//When the Blog Post is null
 		try {

@@ -8,21 +8,35 @@ import com.trav.api.controllers.BlogPostController;
 import com.trav.exceptions.PersistenceException;
 import com.trav.models.BlogPost;
 import com.trav.services.BlogPostService;
+import com.trav.utils.PersistenceUtility;
 
 @Service
 public class BlogPostServiceImpl implements BlogPostService {
 
 	public static final Logger LOGGER = LoggerFactory.getLogger(BlogPostServiceImpl.class);
 	
-	@Override
+	
+	/**
+	 * This method deals with creating a new Blog Post.
+	 * 
+	 * @param blogPost - The Blog Post trying to be persisted in the DB
+	 * @return blogPost - The result of the attempted persistence (can be null)
+	 */
+	@Override 
 	public BlogPost createPost(BlogPost blogPost) {
 		try {
-			if(blogPost == null) { throw new NullPointerException(); }
-			System.out.println("We are within the Try Block of BlogPostServiceImpl.createPost())");
-			blogPost.setContent("SUCCESS");
+			if(blogPost == null) { //Error will be different if the Blog Post object is null
+				throw new NullPointerException(); 
+			}
+			
+			/* TODO: For Testing Purposes - At this Point, you should use the AWS SDK to save the blogPost. However, for now, we will 
+			   hardcode into the BlogPost that the content is "ERROR" to force an error in this scenario or not
+			*/
+			if (blogPost.getContent().contains("ERROR")) throw new Exception("error with persistence");
+			
 			LOGGER.info("Successfully Persisted Blog Post " + blogPost.getBlogPostId());
 			return blogPost;
-		} catch (Exception exc) {
+		} catch (Exception exc) { //Catches any exception
 			String reason = null;
 			if (exc.getClass().equals(NullPointerException.class)) { 
 				reason = "The BlogPost is null! That's no good!";
@@ -50,5 +64,4 @@ public class BlogPostServiceImpl implements BlogPostService {
 	public void deleteBlogPost(BlogPost blogPost) {
 		System.out.println("Deleting Post");
 	}
-
 }

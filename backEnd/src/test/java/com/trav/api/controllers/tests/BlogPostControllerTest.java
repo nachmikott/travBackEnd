@@ -81,7 +81,7 @@ public class BlogPostControllerTest {
         		BlogPost.class);
 
         Mockito.doThrow(new PersistenceException("error")).when(blogPostService).createPost(Mockito.any(BlogPost.class));
-        
+       
         //Initiate Test
         ResponseEntity<BlogPost> result = blogPostController.postBlog(blogPostRequest);
         
