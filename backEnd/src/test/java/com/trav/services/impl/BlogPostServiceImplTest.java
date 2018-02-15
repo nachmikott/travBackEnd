@@ -9,18 +9,13 @@ import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.mockito.Spy;
-import org.mockito.stubbing.Answer;
-
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.trav.backEnd.App;
 import com.trav.exceptions.PersistenceException;
 import com.trav.models.BlogPost;
-import com.trav.utils.PersistenceUtility;
-
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;;
 

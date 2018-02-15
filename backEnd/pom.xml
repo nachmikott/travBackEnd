@@ -43,6 +43,13 @@
 		    <artifactId>jackson-databind</artifactId>
 	    </dependency>
 		
+		<!-- This is Lombok Dependency. This allows us to avoid boiler plate code like getters 
+			setters etc. Check it out here! https://projectlombok.org/ -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
 
 	</dependencies>
   

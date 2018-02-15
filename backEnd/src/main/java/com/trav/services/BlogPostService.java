@@ -1,6 +1,5 @@
 package com.trav.services;
 
-import org.springframework.stereotype.Service;
 import com.trav.models.BlogPost;
 
 /**
